@@ -315,7 +315,8 @@ class Keyboard {
     const cursor = textarea.selectionStart;
     event.preventDefault();
     textarea.focus();
-    textarea.textContent += target;
+    textarea.textContent = `${textarea.textContent.slice(0, cursor)}${target}${
+      textarea.textContent.slice(cursor, textarea.textContent.length)}`;
     textarea.setSelectionRange(cursor + 1, cursor + 1);
     return this.cursor;
   }
@@ -456,11 +457,46 @@ class Keyboard {
     }
     return this.target;
   }
+
+  setLanguage() {
+    const buttons = document.querySelectorAll('.keyboard-button');
+    if (localStorage.getItem('language') === 'en') {
+      for (let i = 0; i < buttons.length; i += 1) {
+        if (localStorage.getItem('capslock') === 'off') {
+          buttons[i].textContent = buttons[i].dataset.en;
+        } else {
+          buttons[i].textContent = buttons[i].dataset.enshift;
+        }
+      }
+    }
+    if (localStorage.getItem('language') === 'ru') {
+      for (let i = 0; i < buttons.length; i += 1) {
+        if (localStorage.getItem('capslock') === 'off') {
+          buttons[i].textContent = buttons[i].dataset.ru;
+        } else {
+          buttons[i].textContent = buttons[i].dataset.rushift;
+        }
+      }
+    } else {
+      localStorage.setItem('language', 'en');
+      for (let i = 0; i < buttons.length; i += 1) {
+        if (localStorage.getItem('capslock') === 'off') {
+          buttons[i].textContent = buttons[i].dataset.en;
+        } else {
+          buttons[i].textContent = buttons[i].dataset.enshift;
+        }
+      }
+    }
+    return this.buttons;
+  }
 }
 
 const keyboard = new Keyboard(body);
 const keyboard1 = new Keyboard();
-keyboard.addButton();
+window.onload = () => {
+  keyboard1.setLanguage();
+  keyboard.addButton();
+};
 
 document.addEventListener('click', (event) => {
   if (event.target.innerHTML === 'CapsLock') { keyboard1.switchCapsLock(); }
