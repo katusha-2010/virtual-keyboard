@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+.body-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+        margin: 0 auto;
+    }
+    
+    .textarea {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 18px;
+        width: 700px;
+        height: 200px;
+        margin: 10px auto;
+        padding: 10px;
+    }
+
+    .keyboard-wrapper {
+        width: 704px;
+        margin: 0 auto;
+        border: 3px solid #222222;
+        border-radius: 5px;
+        background: #888888;
+        display: flex; 
+        flex-wrap: wrap;
+        justify-content: space-around;       
+        margin-top: 8px;
+        margin-bottom: 8px;
+        row-gap: 2px;  
+        
+        .clear {
+            clear: both;
+            width: 100%;
+        }
+    }
+
+    .keyboard-row {
+        display: flex;
+        justify-content: space-around;       
+        margin-top: 8px;
+        margin-bottom: 8px;        
+    }
+
+    .keyboard-button {        
+        font-size: 16px;
+        font-weight: 700;
+        color: #ffffff;        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;        
+        background: #444444;
+        border-radius: 3px;
+        cursor: pointer;
+        
+        &.Backspace, &.CapsLock, &.ShiftLeft {
+            width: 100px;
+        }
+
+        &.Tab {
+            width: 50px;
+        }
+
+        &.Enter, &.ShiftRight {
+            width: 86px;
+        }
+
+        &.Space {
+            width: 330px;
+        }
+
+        &.AltLeft, &.AltRight, &.Backspace, &.CapsLock, &.ControlLeft, &.ControlRight, &.Delete,
+         &.ArrowDown, &.Enter, &.ArrowLeft, &.ArrowRight, &.ShiftLeft,
+          &.ShiftRight, &.Space, &.Tab, &.ArrowUp, &.MetaLeft {
+              background-color: #222222;            
+        }
+
+        &:hover {
+            background-color: rgb(88, 140, 123);
+        }
+
+        &.active {
+            background-color: aquamarine;
+            border-radius: 50px;
+        }
+    }
+
+    .description, .info {
+        margin: 10px auto;
+        font-size: 18px;
+        font-weight: 700;
+    }
+}
+
