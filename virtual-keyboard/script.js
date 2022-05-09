@@ -276,8 +276,23 @@ class Keyboard {
     return this.button;
   }
 
-  addClassActive(button) {
-    button.classList.add('active');
+  addClassActive(target) {
+    const buttons = document.querySelectorAll('.keyboard-button');
+    buttons.forEach((el) => {
+      if (el.textContent !== 'CapsLock') {
+        target.classList.add('active');
+      }
+    });
+    return this.button;
+  }
+
+  removeClassActive() {
+    const buttons = document.querySelectorAll('.keyboard-button');
+    buttons.forEach((el) => {
+      if (el.textContent !== 'CapsLock') {
+        el.classList.remove('active');
+      }
+    });
     return this.button;
   }
 
@@ -529,11 +544,13 @@ document.addEventListener('keyup', (event) => {
 });
 document.addEventListener('mousedown', (event) => {
   keyboard1.shiftDown(event.target.innerHTML);
-  if (event.target.innerHTML !== 'CapsLock') { keyboard1.toggleActive(event.target); }
+  if (event.target.innerHTML !== 'CapsLock') { keyboard1.addClassActive(event.target); }
 });
 document.addEventListener('mouseup', (event) => {
   keyboard1.shiftUp(event.target.innerHTML);
-  if (event.target.innerHTML !== 'CapsLock') { keyboard1.toggleActive(event.target); }
+  if (event.target.innerHTML !== 'CapsLock') {
+    keyboard1.removeClassActive();
+  }
 });
 window.addEventListener('beforeunload', keyboard1.setLocalStorage);
 window.addEventListener('load', keyboard1.getLocalStorage);
